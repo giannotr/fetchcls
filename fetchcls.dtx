@@ -1,0 +1,122 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2015 by Ruben Giannotti 
+% <ruben dot giannotti at gmx dot net>
+% -------------------------------------------------------
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.3c of this license or (at your option) any
+% later version. The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions
+% of LaTeX version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Ruben Giannotti.
+%
+% This work consists of the files
+%   fetchcls.dtx 
+%   fetchcls.ins
+% and the derived file fetchcls.sty.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{fetchcls.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2008/04/05]
+%<package>\ProvidesPackage{blocktable}
+%<*package>
+    [2015/08/11 v1.0 Fetch the class name (RG)]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{parskip}
+\setlength\parindent{0pt}
+\newcommand\pkg{\textsf}
+\newcommand\url{\texttt}
+\newcommand\email{\texttt}
+\begin{document}
+  \DocInput{fetchcls.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2015/08/11}{Initial version}
+%
+% \GetFileInfo{fetchcls.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment,\!,\@empty,\@gobble,\@gobbletwo}
+% \DoNotIndex{\@ifpackageloaded,\@ifpackagewith,\@ifundefined,\@namedef}
+% \DoNotIndex{\@nil,\@onlypreamble,\@tempa,\@tempb,\@tempswafalse,\def}
+% \DoNotIndex{\@tempswatrue,\^,\-,\active,\begingroup,\catcode,\@car,\@cdr}
+% \DoNotIndex{\edef,\else,\endgroup,\endinput,\expandafter,\fi,\if}
+% \DoNotIndex{\if@tempswa,\ifcase,\ifnum,\ifx,\lccode,\let,\lowercase}
+% \DoNotIndex{\MessageBreak,\next,\number,\numexpr,\or,\PackageError}
+% \DoNotIndex{\PackageWarning,\PackageWarningNoLine,\strip@prefix,\@@end}
+% \DoNotIndex{\relax,\space,\string,\DeclareOption,\ProcessOptions}
+% \DoNotIndex{\meaning,\ifdefined,\csname,\chardef,\endcsname,\protect}
+% \DoNotIndex{\input,\RequirePackage,\global,\ifcsname,\makeatother}
+% \DoNotIndex{\@makeother,\the,\toks@}
+%
+% \title{The \pkg{fetchcls} package\thanks{This document
+%   corresponds to \pkg{fetchcls}~\fileversion, dated \filedate.}}
+% \author{Ruben Giannotti\thanks{\email{ruben dot giannotti at gmx dot net}}}
+%
+% \maketitle
+%
+% With standard \LaTeX\ you are able to check for the class in use
+% invoking the kernel command \cs{@ifclassloaded}.
+% However, doing so you can't get the explicit class name
+% (unless you want to loop over every possible class name
+% until \cs{@ifclassloaded} returns true -- don't do that!)
+% With the present package you can get the name with significantly less effort.
+% Just load the package as usual:
+% \begin{flushleft}
+%   \cs{usepackage}\{fetchcls\}
+% \end{flushleft}
+% Then, the control sequence \cs{classname} will hold the name of the current class.
+% Let's have a brief look on how the two code lines of this package tackle this task.
+%
+% \StopEventually{}
+%
+% We will use the \cs{@filelist} to retrive the class name 
+% as it contains the class name as its first entry.
+% Since the class is captured with its extension we define a macro
+% with the explicit class extension of \LaTeX\ as delimiter.
+% Then the rest will be read until the end and thrown away.
+% Everything in front of the delimiter will be written into \cs{classname}.
+%    \begin{macrocode}
+\def\f@tchcls#1.cls#2 {\def\classname{#1}}
+%    \end{macrocode}
+% The next and alredy last step consists in apllying \cs{f@tchcls}
+% to the \cs{@filelist} ensuring that it gets expanded before \cs{f@tchcls} reads it.
+%    \begin{macrocode}
+\begingroup\edef\x{\endgroup\noexpand\f@tchcls\@filelist\space}\x
+%    \end{macrocode}
+%
+% \Finale
+\endinput
