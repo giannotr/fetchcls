@@ -113,8 +113,8 @@
 %    \begin{macrocode}
 \def\f@tchcls#1.cls#2 {\def\classname{#1}}
 %    \end{macrocode}
-% The next and alredy last step consists in apllying \cs{f@tchcls}
-% to the \cs{@filelist} ensuring that it gets expanded before \cs{f@tchcls} reads it.
+% The next and alredy last step consists in apllying \cs{f@tchcls}to the \cs{@filelist}
+% while ensuring that it gets expanded before \cs{f@tchcls} reads it.
 %    \begin{macrocode}
 \begingroup\edef\x{\endgroup\noexpand\f@tchcls\@filelist\space}\x
 %    \end{macrocode}
