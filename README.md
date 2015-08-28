@@ -9,7 +9,7 @@ With the present package you can get the name with significantly less effort.
 Just load the package as usual:
 
     \begin{flushleft}
-      \cs{usepackage}\{fetchcls\}
+      \usepackage{fetchcls}
     end{flushleft}
     
 Then, the control sequence `\classname` will hold the name of the current class.
