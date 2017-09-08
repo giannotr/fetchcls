@@ -31,5 +31,5 @@ and the derived file fetchcls.sty.
 
 To install the package
 
- 1. run latex `fetchcls.ins`
+ 1. run `latex fetchcls.ins`
  2. move 'fetchcls.sty' to locations where LaTeX will find it
